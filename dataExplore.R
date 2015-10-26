@@ -108,20 +108,20 @@ UG<-all[grep("Undergraduate",all$Level),]
 ## all1<-all[-grep("^very small",all$Class.Size),]
 
 ## a creates a table of professors by order of most data entries (classes taught with submitted grades)
-a<-as.data.frame(table(all$Name));a<-a[order(a$Freq, decreasing=TRUE),]
+a<-as.data.frame(table(UG$Name));a<-a[order(a$Freq, decreasing=TRUE),]
 
-## b does the same as a, for course numbers not profs
-b<-as.data.frame(table(all$Course));b<-b[order(b$Freq, decreasing=TRUE),]
+## b does the same as a, for course numbers
+b<-as.data.frame(table(UG$Course));b<-b[order(b$Freq, decreasing=TRUE),]
 
-## ex2 gives a list of the course "handle", ex. ME, CS, AE..
+## ex2 gives a list of the course "handle", ex. ME, CS, AE.. ordered by number of distinct courses
 ex1<-gsub("[0-9]", "",b[[1]]);ex1<-gsub(" ", "",ex1)
-ex2<-levels(as.factor(ex1))
+ex2<-as.data.frame(table(ex1));ex2<-ex2[order(ex2$Freq, decreasing=TRUE),]
 
 ## p1 creates a dataframe with the first (most frequent) prof's grade data
-p1<-all[all$Name==a[1,1],]
+p1<-UG[UG$Name==a[1,1],]
 
 ## m1 doallthe same as p1, for b instead of a
-m1<-all[all$Course==b[1,1],]
+m1<-UG[UG$Course==b[1,1],]
 
 ## q and q2 get and tabulate the classes taught by Prof p1 and their size designations.
 q<-as.data.frame(table(as.character(p1$Course)));q<-q[order(q$Freq, decreasing=TRUE),]
@@ -133,9 +133,22 @@ xvec<-c(mean(p1$wA),mean(p1$wB),mean(p1$wC),mean(p1$wD),mean(p1$wF),mean(p1$wW))
 xvec<-cbind(c("wA","wB","wC","wD","wF","wW"),xvec)
 xvec<-as.data.frame(xvec)
 colnames(xvec)<-c("label","weight")
+xvec$weight<-as.numeric(as.character(xvec$weight))
+
+x2vec<-c(mean(m1$wA),mean(m1$wB),mean(m1$wC),mean(m1$wD),mean(m1$wF),mean(m1$wW))
+x2vec<-cbind(c("wA","wB","wC","wD","wF","wW"),x2vec)
+x2vec<-as.data.frame(x2vec)
+colnames(x2vec)<-c("label","weight")
+x2vec$weight<-as.numeric(as.character(x2vec$weight))
+
 
 ## Basic histogram showing weighted grade distribution
+
+## By Professor
 qplot(label,weight,data=xvec,geom="histogram",stat="identity", main=p1$Name[1])
+
+## By Course
+qplot(label,weight,data=x2vec,geom="histogram",stat="identity", main=m1$Course[1])
 
 ## Basic scatter plots for Calculated.GPA (unweighted) vs time (Term.Date), color-coded by Class.Size
 
