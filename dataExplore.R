@@ -151,9 +151,13 @@ qplot(label,weight,data=xvec,geom="histogram",stat="identity", main=p1$Name[1])
 qplot(label,weight,data=x2vec,geom="histogram",stat="identity", main=m1$Course[1])
 
 ## Basic scatter plots for Calculated.GPA (unweighted) vs time (Term.Date), color-coded by Class.Size
-
 ## By Professor:
 qplot(x=p1$Term.Date,y=p1$Calculated.GPA, color=as.factor(p1$Class.Size), main=p1$Name[1])
-
 ## By Course:
 qplot(x=m1$Term.Date,y=m1$Calculated.GPA, color=as.factor(m1$Class.Size), main=m1$Course[1])
+
+## Scatter plots for Calculated.GPA (unweighted) vs time (Term.Date) with regression lines
+## By Professor
+qplot(x=p1$Term.Date,y=p1$Calculated.GPA, main=p1$Name[1], geom=c("point","smooth"), method="lm")
+## By Course
+qplot(x=m1$Term.Date,y=m1$Calculated.GPA, main=m1$Course[1], geom=c("point","smooth"), method="lm")
