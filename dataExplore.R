@@ -51,9 +51,6 @@ old[,c(1:4,11,13)]<-apply(old[,c(1:4,11,13)],2,function(x) as.character(x))
 ## Putting together datasets to finally get going somewhere!!
 all<-rbind(new2,old)
 
-## Final sweep to clean for NA values
-all<-all[!apply(all, 1, function(x) any(is.na(x))),]
-
 ### Continue CLEANING COLUMNS, feature creation
 
 ## Class Size (to prevent duplicates due to CaSe differences)
@@ -98,6 +95,9 @@ Term.Date<-paste(Term.Yr,Term.Mth,sep="")
 Term.Date<-as.POSIXct(Term.Date,"%Y-%m-%d")
 
 all<-cbind(all,Term.Date)
+
+## Final sweep to clean for NA values
+all<-all[!apply(all, 1, function(x) any(is.na(x))),]
 
 ## Create UG dataframe with only Undergrad classes (to un-skew GPAs, class freqs)
 UG<-all[grep("Undergraduate",all$Level),]
