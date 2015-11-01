@@ -19,3 +19,5 @@
 ## Ideas (random)
 
 #  b-style df for courses, filtered by major "handle" vector. "Cascading" scatter plots by major.
+
+# Class chart with professor averages by term. (Hari's idea)
