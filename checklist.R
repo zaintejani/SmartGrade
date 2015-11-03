@@ -15,9 +15,22 @@
 ## Move up timeline, first shiny app live mid-Nov.
 
 
+### IDEAS AND STUFF ###
 
-## Ideas (random)
+## Lets build some UI functionality, to set up the selector, codename Babymaker.
 
-#  b-style df for courses, filtered by major "handle" vector. "Cascading" scatter plots by major.
+## Babymaker design:
+## Major "handle"/Field of Study selector (ME, CS, etc.)[Dropdown/scroller, single select]
+## Course selector (ME 2110, etc.)[Dropdown/scroller, single select] REACTIVE
+## Prof selector [Dropdown/scroller, multi-select] REACTIVE
+## Term filter [Year: scroller multi/select, Term: checkbox filters (fall, spring, summer)]
 
-# Class chart with professor averages by term. (Hari's idea)
+## Plot Dev:
+## Density plots, convert wA lables to arbitrary % thresholds (standard grading curve)
+## Use grade boundaries to weight the data for scatter (avg by class by prof by term, compared by avg class weight for said parameters)
+## ML/Prediction featurettes based on lm line on plot (i.e. Predicted GPA next semester, based on parameters selected)
+
+#### watch for changing lm gradients as year span changes (flatter for long?), figure out what is the optimal
+#### number of years to be selected for good estimate plus low data usage.
+
+## head-to-head comparisons (prof v prof, color-coded density plots lm plots.)

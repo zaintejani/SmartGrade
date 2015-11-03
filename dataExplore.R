@@ -114,7 +114,7 @@ a<-as.data.frame(table(UG$Name));a<-a[order(a$Freq, decreasing=TRUE),]
 b<-as.data.frame(table(UG$Course));b<-b[order(b$Freq, decreasing=TRUE),]
 
 ## ex2 gives a list of the course "handle", ex. ME, CS, AE.. ordered by number of distinct courses
-ex1<-gsub("[0-9]", "",b[[1]]);ex1<-gsub(" ", "",ex1)
+ex1<-gsub("[0-9]", "",UG$Course);ex1<-gsub(" ", "",ex1)
 ex2<-as.data.frame(table(ex1));ex2<-ex2[order(ex2$Freq, decreasing=TRUE),]
 
 ## p1 creates a dataframe with the first (most frequent) prof's grade data
