@@ -1,18 +1,22 @@
 ### CHECKLIST
 
-## Basic plots: Total distribution and Time Sewries DONE (basic unweighted-ish)
+## Basic plots: Total distribution and Time Series DONE (basic unweighted-ish)
 
 ## Combine old and new data. Remove irrelevant columns(from new). Clean data column classes using apply() DONE
+## (Refinement possible. Consider further feature creation, reduction, column ordering)
 
-## ggplot2 tutorial. Add regressor lines to scatter plots, distribution curves instead of blocky hists.
+## ggplot2 tutorial. Add regressor lines to scatter plots, distribution curves instead of blocky hists. WORKING (nearly there)
+## Add grade weights (like class weights) to work around the discrete var problem with hist to density.
 
-## shiny package install + tutorial. Mess with selector options to replace a and b in p1 and m1 selections.
+## shiny package install + tutorial. Mess with selector options to replace a and b in p1 and m1 selections. WORKING (progress good)
+## Work UI until it's a thing of beauty.
 
-## Combine selction filers using && (relearn &&)
+## Combine selction filers using && (relearn &&) (Maybe irrelevant)
 
 ## Investigate ML (regression) models to predict next semester GPA, with categorical considerations for semester.
+## Install caret package, ref slides from reg + ML
 
-## Move up timeline, first shiny app live mid-Nov.
+## Move up timeline, first shiny app live mid-Nov.[T-Givens. THWg]
 
 
 ### IDEAS AND STUFF ###
@@ -23,7 +27,8 @@
 ## Major "handle"/Field of Study selector (ME, CS, etc.)[Dropdown/scroller, single select]
 ## Course selector (ME 2110, etc.)[Dropdown/scroller, single select] REACTIVE
 ## Prof selector [Dropdown/scroller, multi-select] REACTIVE
-## Term filter [Year: scroller multi/select, Term: checkbox filters (fall, spring, summer)]
+## Term filter [Year: slider multi/select, Term: checkbox filters (fall, spring, summer)]
+## Plot type selector (if statement backend),(scatter, hist, single and head-to-head)
 
 ## Plot Dev:
 ## Density plots, convert wA lables to arbitrary % thresholds (standard grading curve)
