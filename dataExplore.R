@@ -87,6 +87,9 @@ Term.Mth[grep("Fall",all$Term)]<-"-12-01"
 Term.Mth[grep("Summer",all$Term)]<-"-07-01"
 Term.Mth[grep("Spring",all$Term)]<-"-04-01"
 
+Semester<-gsub("[0-9]","",all$Term)
+Semester<-gsub(" ","",Semester)
+
 Term.Yr<-gsub("[A-Za-z]","",all$Term)
 Term.Yr<-gsub(" ","",Term.Yr)
 
@@ -94,7 +97,7 @@ Term.Date<-paste(Term.Yr,Term.Mth,sep="")
 
 Term.Date<-as.POSIXct(Term.Date,"%Y-%m-%d")
 
-all<-cbind(all,Term.Date)
+all<-cbind(all,Term.Date,Term.Yr,Semester)
 
 ## Final sweep to clean for NA values
 all<-all[!apply(all, 1, function(x) any(is.na(x))),]
