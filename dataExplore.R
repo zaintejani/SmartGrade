@@ -97,7 +97,7 @@ Term.Date<-paste(Term.Yr,Term.Mth,sep="")
 
 Term.Date<-as.POSIXct(Term.Date,"%Y-%m-%d")
 
-all<-cbind(all,Term.Date,Term.Yr,Semester)
+all<-cbind(Term.Date,Term.Yr,Semester,all)
 
 ## Final sweep to clean for NA values
 all<-all[!apply(all, 1, function(x) any(is.na(x))),]
