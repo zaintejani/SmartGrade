@@ -136,26 +136,32 @@ m1<-UG[UG$Course==b[1,1],]
 # q2<-as.data.frame(table(as.character(p1$Class.Size)));q2<-q2[order(q2$Freq, decreasing=TRUE),]
 
 ## Focus on p1, m1, try to start building basic plots
-xvec<-c(mean(p1$wA),mean(p1$wB),mean(p1$wC),mean(p1$wD),mean(p1$wF),mean(p1$wW))
-xvec<-cbind(c("wA","wB","wC","wD","wF","wW"),xvec)
+xvec<-apply(p1[,20:25],2,function(x) {mean(x)/mean(p1$Class.Weight)})
+xvec<-cbind(c("A","B","C","D","F","W"),c(90,80,70,60,50,40),xvec)
 xvec<-as.data.frame(xvec)
-colnames(xvec)<-c("label","weight")
-xvec$weight<-as.numeric(as.character(xvec$weight))
+colnames(xvec)<-c("grade","weight","distribution")
+xvec$weight<-as.numeric(as.character(xvec$weight));xvec$distribution<-as.numeric(as.character(xvec$distribution))
 
-x2vec<-c(mean(m1$wA),mean(m1$wB),mean(m1$wC),mean(m1$wD),mean(m1$wF),mean(m1$wW))
-x2vec<-cbind(c("wA","wB","wC","wD","wF","wW"),x2vec)
+x2vec<-apply(m1[,20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
+x2vec<-cbind(c("A","B","C","D","F","W"),c(90,80,70,60,50,40),x2vec)
 x2vec<-as.data.frame(x2vec)
-colnames(x2vec)<-c("label","weight")
-x2vec$weight<-as.numeric(as.character(x2vec$weight))
+colnames(x2vec)<-c("grade","weight","distribution")
+x2vec$weight<-as.numeric(as.character(x2vec$weight));x2vec$distribution<-as.numeric(as.character(x2vec$distribution))
 
 
 ## Basic histogram showing weighted grade distribution
-
 ## By Professor
-qplot(label,weight,data=xvec,geom="histogram",stat="identity", main=p1$Name[1])
+qplot(grade,distribution,data=xvec,geom="histogram",stat="identity", main=p1$Name[1])
 
 ## By Course
-qplot(label,weight,data=x2vec,geom="histogram",stat="identity", main=m1$Course[1])
+qplot(grade,distribution,data=x2vec,geom="histogram",stat="identity", main=m1$Course[1])
+
+## Same as above, but density geometry instead for numeric relations, updated with new DF format
+## By Professor
+qplot(weight,distribution,data=xvec,geom="density",stat="identity", main=p1$Name[1])
+
+## By Course
+qplot(weight,distribution,data=x2vec,geom="density",stat="identity", main=m1$Course[1])
 
 ## Basic scatter plots for Calculated.GPA (unweighted) vs time (Term.Date), color-coded by Class.Size
 ## By Professor:
