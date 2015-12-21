@@ -120,20 +120,11 @@ a<-as.data.frame(table(UG$Name));a<-a[order(a$Freq, decreasing=TRUE),]
 ## b does the same as a, for course numbers
 b<-as.data.frame(table(UG$Course));b<-b[order(b$Freq, decreasing=TRUE),]
 
-## ex2 gives a list of the course "handle", ex. ME, CS, AE.. ordered by number of distinct courses
-# ex1<-gsub("[0-9]", "",UG$Course);ex1<-gsub(" ", "",ex1)
-# ex2<-as.data.frame(table(ex1));ex2<-ex2[order(ex2$Freq, decreasing=TRUE),]
-
 ## p1 creates a dataframe with the first (most frequent) prof's grade data
-p1<-UG[UG$Name==a[1,1],]
+p1<-UG[UG$Name==a[1,1]|UG$Name==a[2,1],]
 
-## m1 doallthe same as p1, for b instead of a
-m1<-UG[UG$Course==b[1,1],]
-
-## q and q2 get and tabulate the classes taught by Prof p1 and their size designations.
-# q<-as.data.frame(table(as.character(p1$Course)));q<-q[order(q$Freq, decreasing=TRUE),]
-# p1$Class.Size<-tolower(p1$Class.Size)
-# q2<-as.data.frame(table(as.character(p1$Class.Size)));q2<-q2[order(q2$Freq, decreasing=TRUE),]
+## m1 do the same as p1, for b instead of a
+m1<-UG[UG$Course==b[1,1]|UG$Course==b[2,1],]
 
 ## Focus on p1, m1, try to start building basic plots
 xvec<-apply(p1[,20:25],2,function(x) {mean(x)/mean(p1$Class.Weight)})
@@ -170,7 +161,7 @@ qplot(x=p1$Term.Date,y=p1$Calculated.GPA, color=as.factor(p1$Class.Size), main=p
 qplot(x=m1$Term.Date,y=m1$Calculated.GPA, color=as.factor(m1$Class.Size), main=m1$Course[1])
 
 ## Scatter plots for Calculated.GPA (unweighted) vs time (Term.Date) with regression lines
-## By Professor
-qplot(x=p1$Term.Date,y=p1$Calculated.GPA, main=p1$Name[1], geom=c("point","smooth"), method="lm")
-## By Course
-qplot(x=m1$Term.Date,y=m1$Calculated.GPA, main=m1$Course[1], geom=c("point","smooth"), method="lm")
+## By Professor (h2h)
+qplot(x=p1$Term.Date,y=p1$Calculated.GPA, color=p1$Name, geom=c("point","smooth"), method="lm")
+## By Course (h2h)
+qplot(x=m1$Term.Date,y=m1$Calculated.GPA, color=m1$Course, geom=c("point","smooth"), method="lm")
