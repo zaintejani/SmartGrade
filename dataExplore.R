@@ -139,6 +139,22 @@ x2vec<-as.data.frame(x2vec)
 colnames(x2vec)<-c("grade","weight","distribution")
 x2vec$weight<-as.numeric(as.character(x2vec$weight));x2vec$distribution<-as.numeric(as.character(x2vec$distribution))
 
+## Head-to-head versions of xvec
+p1vec<-apply(p1[p1$Name==levels(as.factor(p1$Name))[1],20:25],2,function(x) {mean(x)/mean(p1$Class.Weight)})
+p2vec<-apply(p1[p1$Name==levels(as.factor(p1$Name))[2],20:25],2,function(x) {mean(x)/mean(p1$Class.Weight)})
+pvec<-cbind(c("A","B","C","D","F","W"),c(90,80,70,60,50,40),p1vec,p2vec)
+pvec<-as.data.frame(pvec)
+colnames(pvec)<-c("grade","weight","dist.P1", "dist.P2")
+pvec$weight<-as.numeric(as.character(pvec$weight))
+pvec$dist.P1<-as.numeric(as.character(pvec$dist.P1));pvec$dist.P2<-as.numeric(as.character(pvec$dist.P2))
+
+m1vec<-apply(m1[m1$Name==levels(as.factor(m1$Name))[1],20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
+m2vec<-apply(m1[p1$Name==levels(as.factor(m1$Name))[2],20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
+mvec<-cbind(c("A","B","C","D","F","W"),c(90,80,70,60,50,40),m1vec,m2vec)
+mvec<-as.data.frame(mvec)
+colnames(mvec)<-c("grade","weight","dist.M1", "dist.M2")
+mvec$weight<-as.numeric(as.character(mvec$weight))
+mvec$dist.M1<-as.numeric(as.character(mvec$dist.M1));mvec$dist.M2<-as.numeric(as.character(mvec$dist.M2))
 
 ## Basic histogram showing weighted grade distribution
 ## By Professor
