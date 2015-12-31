@@ -149,7 +149,7 @@ pvec$weight<-as.numeric(as.character(pvec$weight))
 pvec$dist.P1<-as.numeric(as.character(pvec$dist.P1));pvec$dist.P2<-as.numeric(as.character(pvec$dist.P2))
 
 m1vec<-apply(m1[m1$Name==levels(as.factor(m1$Name))[1],20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
-m2vec<-apply(m1[p1$Name==levels(as.factor(m1$Name))[2],20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
+m2vec<-apply(m1[m1$Name==levels(as.factor(m1$Name))[2],20:25],2,function(x) {mean(x)/mean(m1$Class.Weight)})
 mvec<-cbind(c("A","B","C","D","F","W"),c(90,80,70,60,50,40),m1vec,m2vec)
 mvec<-as.data.frame(mvec)
 colnames(mvec)<-c("grade","weight","dist.M1", "dist.M2")
@@ -181,3 +181,13 @@ qplot(x=m1$Term.Date,y=m1$Calculated.GPA, color=as.factor(m1$Class.Size), main=m
 qplot(x=p1$Term.Date,y=p1$Calculated.GPA, color=p1$Name, geom=c("point","smooth"), method="lm")
 ## By Course (h2h)
 qplot(x=m1$Term.Date,y=m1$Calculated.GPA, color=m1$Course, geom=c("point","smooth"), method="lm")
+
+## Head-to-head density plots (rudimentary, labels need adjusting)
+## By Professor:
+ggplot(pvec, aes(weight)) + 
+  geom_line(aes(y = dist.P1, colour = "dist.P1")) + 
+  geom_line(aes(y = dist.P2, colour = "dist.P2"))
+## By Course:
+ggplot(mvec, aes(weight)) + 
+  geom_line(aes(y = dist.M1, colour = "dist.M1")) + 
+  geom_line(aes(y = dist.M2, colour = "dist.M2"))
