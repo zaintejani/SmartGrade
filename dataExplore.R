@@ -5,6 +5,13 @@
 ## Import final grade table
 all<-read.csv("./Grade_data/final.csv", header=TRUE)
 
+## Correct classes for columns
+for (i in 1:ncol(all)){
+  if (class(all[,i])=="factor"){
+    all[,i]<-as.character(all[,i])
+  }
+}
+
 ## Create UG dataframe with only Undergrad classes (to un-skew GPAs, class freqs)
 UG<-all[grep("Undergraduate",all$Level),]
 
