@@ -1,13 +1,13 @@
-## LETS BULID IT, BABY!
+## CHANGE EVERYTHING!
 
-## Assume data structures present: UG. Add column: Field (ME, CS, AE, etc.)
+## Figure out purpose of plots:
+## Professor comparison: h2h hist/density, h2h ts
 
-w<-UG[UG$Field==input$Field,]
-w<-w[w$Course==input$Course,]
-w<-w[w$Name==input$Name,]
-w<-w[w$Year==input$Year,]
-w<-w[w$Term==input$Term,]
-
-## insert plots with w as the main df from which to pull data.
-
-## investigate "in" instead of "==" for multi-select variables.
+## class level (UG, Grad)
+## field of study
+## Course
+## Prof 1
+## Prof 2
+## Semester/year parameters (checkboxes, double slider)
+## Class size filters (multi-select checkboxes)
+## plot type (hist, density, time series)
