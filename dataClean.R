@@ -107,4 +107,4 @@ all<-cbind(Term.Date,Term.Yr,Semester,Field,all)
 all<-all[!apply(all, 1, function(x) any(is.na(x))),]
 
 ## Write data to final clean table
-write.csv(all, file="./Grade_data/final.csv")
+save(list = "all", file = "./Grade_data/final.RData", envir = .GlobalEnv)

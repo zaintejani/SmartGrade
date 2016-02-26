@@ -3,14 +3,11 @@
 ### Part 1: Data Exploration and Basic Plots
 
 ## Import final grade table
-all<-read.csv("./Grade_data/final.csv", header=TRUE)
+load("./Grade_data/final.RData")
 
 ## Correct classes for columns
-for (i in 1:ncol(all)){
-  if (class(all[,i])=="factor"){
-    all[,i]<-as.character(all[,i])
-  }
-}
+all[,2]<-as.numeric(all[,2])
+all[,3:4]<-apply(all[,3:4],2,function(x) as.character(x))
 
 ## Create UG dataframe with only Undergrad classes (to un-skew GPAs, class freqs)
 UG<-all[grep("Undergraduate",all$Level),]
